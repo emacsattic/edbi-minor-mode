@@ -28,9 +28,11 @@
 
 (require 'edbi)
 
-(defvar-local edbi-minor-mode-connection nil "")
+(defvar-local edbi-minor-mode-connection nil
+  "Edbi minor mode connection.")
 
-(defvar-local edbi-minor-mode-result-buffer nil "")
+(defvar-local edbi-minor-mode-result-buffer nil
+  "Target buffer to show current buffer queries result.")
 
 (defvar edbi-minor-mode-map
   (let ((map (make-sparse-keymap)))
@@ -39,14 +41,14 @@
     (define-key map [remap sql-send-region] 'edbi-minor-mode-execute-region)
     (define-key map [remap sql-send-string] 'edbi-minor-mode-execute)
     map)
-  "")
+  "Edbi minor mode keymap.")
 
 (define-minor-mode edbi-minor-mode
-  ""
+  "Minor mode for using Edbi from current buffer."
   :lighter " Edbi")
 
 (defun edbi-minor-mode-execute (sql)
-  ""
+  "Execute SQL statement."
   (interactive "sSQL: ")
   (unless edbi-minor-mode-connection
     (setq edbi-minor-mode-connection
@@ -62,7 +64,7 @@
    edbi-minor-mode-result-buffer))
 
 (defun edbi-minor-mode-execute-paragraph ()
-  ""
+  "Execute SQL statement from current paragraph."
   (interactive)
   (let* ((start (save-excursion
                   (backward-paragraph)
@@ -74,13 +76,14 @@
     (edbi-minor-mode-execute sql)))
 
 (defun edbi-minor-mode-execute-region (start end)
-  ""
+  "Execute SQL statement from active region.
+START and END are the region offsets."
   (interactive "r")
   (let ((sql (buffer-substring-no-properties start end)))
     (edbi-minor-mode-execute sql)))
 
 (defun edbi-minor-mode-execute-buffer ()
-  ""
+  "Execute whole buffer as SQL statement."
   (interactive)
   (let ((sql (buffer-substring-no-properties (point-min) (point-max))))
     (edbi-minor-mode-execute sql)))
