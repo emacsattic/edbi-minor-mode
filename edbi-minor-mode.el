@@ -43,6 +43,7 @@
     map)
   "Edbi minor mode keymap.")
 
+;;;###autoload
 (define-minor-mode edbi-minor-mode
   "Minor mode for using Edbi from current buffer."
   :lighter " Edbi")
