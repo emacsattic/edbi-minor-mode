@@ -52,9 +52,11 @@
   "Execute SQL statement."
   (interactive "sSQL: ")
   (unless edbi-minor-mode-connection
-    (setq edbi-minor-mode-connection
-          (buffer-local-value 'edbi:connection
-                              (get-buffer edbi:dbview-buffer-name))))
+    (let ((buffer (get-buffer edbi:dbview-buffer-name)))
+      (unless buffer
+        (error "Unable to find %s buffer" edbi:dbview-buffer-name))
+      (setq edbi-minor-mode-connection
+            (buffer-local-value 'edbi:connection buffer))))
   (unless edbi-minor-mode-result-buffer
     (setq edbi-minor-mode-result-buffer
           (get-buffer-create
