@@ -59,12 +59,9 @@
             (buffer-local-value 'edbi:connection buffer))))
   (unless edbi-minor-mode-result-buffer
     (setq edbi-minor-mode-result-buffer
-          (get-buffer-create
-           (generate-new-buffer-name "*edbi-minor-mode-result*"))))
-  (edbi:dbview-query-execute
-   edbi-minor-mode-connection
-   sql
-   edbi-minor-mode-result-buffer))
+          (generate-new-buffer-name "*edbi-minor-mode-result*")))
+  (let ((buf (get-buffer-create edbi-minor-mode-result-buffer)))
+    (edbi:dbview-query-execute edbi-minor-mode-connection sql buf)))
 
 (defun edbi-minor-mode-execute-paragraph ()
   "Execute SQL statement from current paragraph."
