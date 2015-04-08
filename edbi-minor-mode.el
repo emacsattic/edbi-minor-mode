@@ -40,6 +40,7 @@
     (define-key map [remap sql-send-paragraph] 'edbi-minor-mode-execute-paragraph)
     (define-key map [remap sql-send-region] 'edbi-minor-mode-execute-region)
     (define-key map [remap sql-send-string] 'edbi-minor-mode-execute)
+    (define-key map (kbd "C-c C-z") 'edbi-minor-mode-show-result-buffer)
     map)
   "Edbi minor mode keymap.")
 
@@ -87,6 +88,14 @@ START and END are the region offsets."
   (interactive)
   (let ((sql (buffer-substring-no-properties (point-min) (point-max))))
     (edbi-minor-mode-execute sql)))
+
+(defun edbi-minor-mode-show-result-buffer ()
+  "Show query result buffer associated with current buffer."
+  (interactive)
+  (unless (and edbi-minor-mode-result-buffer
+               (buffer-live-p (get-buffer edbi-minor-mode-result-buffer)))
+    (error "Unable to find result buffer"))
+  (pop-to-buffer edbi-minor-mode-result-buffer))
 
 (provide 'edbi-minor-mode)
 
