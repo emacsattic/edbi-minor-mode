@@ -97,6 +97,18 @@ START and END are the region offsets."
     (error "Unable to find result buffer"))
   (pop-to-buffer edbi-minor-mode-result-buffer))
 
+(defun edbi-minor-mode-list-dbviewers ()
+  "DBViewer buffers list."
+  (--filter (buffer-local-value 'edbi:connection it)
+            (buffer-list)))
+
+(defun edbi-minor-mode-list-connections ()
+  "Edbi connections list."
+  (--map (edbi:data-source-uri
+          (edbi:connection-ds
+           (buffer-local-value 'edbi:connection it)))
+         (edbi-minor-mode-list-dbviewers)))
+
 (provide 'edbi-minor-mode)
 
 ;;; edbi-minor-mode.el ends here
