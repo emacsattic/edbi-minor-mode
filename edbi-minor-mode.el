@@ -1,6 +1,6 @@
 ;;; edbi-minor-mode.el --- Use edbi with regular SQL files.
 
-;; Copyright (C) 2015 by Artem Malyshev
+;; Copyright (C) 2015-2016 by Artem Malyshev
 
 ;; Author: Artem Malyshev <proofit404@gmail.com>
 ;; URL: https://github.com/proofit404/edbi-minor-mode
