@@ -4,7 +4,7 @@
 
 ;; Author: Artem Malyshev <proofit404@gmail.com>
 ;; URL: https://github.com/proofit404/edbi-minor-mode
-;; Version: 0.0.1
+;; Version: 0.1.0
 ;; Package-Requires: ((edbi "0.1.3"))
 
 ;; This program is free software; you can redistribute it and/or modify
